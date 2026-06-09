@@ -27,9 +27,11 @@ export default async function HomePage() {
   try {
     const res = await getPage(HOME_SLUG);
     page = res.data;
-  } catch {
-    notFound();
+  } catch (err) {
+    const status = (err as { status?: number }).status;
+    if (status === 404) notFound();
+    return null;
   }
 
-  return <SectionRenderer sections={page.sections} />;
+  return <SectionRenderer sections={page!.sections} />;
 }

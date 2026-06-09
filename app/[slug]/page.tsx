@@ -34,8 +34,10 @@ export default async function DynamicPage({ params }: Props) {
   try {
     const res = await getPage(slug);
     page = res.data;
-  } catch {
-    notFound();
+  } catch (err) {
+    const status = (err as { status?: number }).status;
+    if (!status || status === 404) notFound();
+    return null;
   }
 
   return (
