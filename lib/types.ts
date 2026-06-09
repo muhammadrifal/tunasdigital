@@ -108,7 +108,19 @@ export type SectionType =
   | "tabs"
   | "ebooks"
   | "partners"
-  | "newsletter";
+  | "newsletter"
+  | "timeline"
+  | "quotes"
+  | "split"
+  | "cards"
+  | "videos"
+  | "page-header"
+  | "quote-person"
+  | "country-cards"
+  | "numbered-cards"
+  | "resources"
+  | "article-cards"
+  | "callout";
 
 export interface PageSection {
   id: number;
