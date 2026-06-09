@@ -13,8 +13,17 @@ export const metadata: Metadata = {
     "Bergabunglah dengan Keluarga Tunas dan jadilah bagian dari gerakan keluarga digital Indonesia.",
 };
 
+const FALLBACK_STATS = {
+  islands: [],
+  total_agents: 0,
+  total_provinces: 0,
+  total_regencies: 0,
+};
+
 export default async function KeluargaTunasPage() {
-  const { data: stats } = await getKeluargaTunasStats();
+  const stats = await getKeluargaTunasStats()
+    .then((res) => res.data)
+    .catch(() => FALLBACK_STATS);
 
   const topIslands = stats.islands.slice(0, 3);
   const bottomIslands = stats.islands.slice(3, 6);
