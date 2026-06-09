@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --primary: #f97316;
+  --primary-dark: #ea6c09;
+  --primary-light: #fff7ed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-figtree), Arial, Helvetica, sans-serif;
+  text-wrap: pretty;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.prose a {
+  color: var(--primary);
+}
+
+.prose img {
+  border-radius: 0.75rem;
+}
+
+/* ── Section text style overrides via CSS custom properties ─────────────────
+   Specificity: [data-st] h2 = 0,1,1 > .text-gray-900 = 0,1,0  → wins without !important
+   Set via SectionRenderer using inline CSS variables per section.
+   ─────────────────────────────────────────────────────────────────────────── */
+[data-st] h1,
+[data-st] h2,
+[data-st] h3,
+[data-st] h4,
+[data-st] h5 {
+  color:       var(--st-hc, inherit);
+  font-weight: var(--st-hw, inherit);
+  font-style:  var(--st-hi, inherit);
+}
+
+[data-st] p {
+  color: var(--st-bc, inherit);
+}
+
+/* ── Section padding override via CSS custom properties ─────────────────────
+   Set --section-pt / --section-pb on the SectionRenderer wrapper div.
+   Uses revert-layer so when unset, Tailwind's py-* class still applies.
+   ─────────────────────────────────────────────────────────────────────────── */
+[style*="--section-pt"] section { padding-top:    var(--section-pt) !important; }
+[style*="--section-pb"] section { padding-bottom: var(--section-pb) !important; }
+
